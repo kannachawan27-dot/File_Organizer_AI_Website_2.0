@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node File_Organizer_AI_Website/Other/server.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
