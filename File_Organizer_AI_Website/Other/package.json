@@ -33,15 +33,13 @@
     "node": ">= 0.6"
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "mocha --reporter spec --check-leaks --bail test/",
-    "test-ci": "nyc --reporter=lcov --reporter=text npm test",
-    "test-cov": "nyc --reporter=html --reporter=text npm test"
-  },
-  "keywords": [
-    "content",
-    "negotiation",
-    "accept",
-    "accepts"
-  ]
+  "start": "node server.js",
+  "test": "mocha --reporter spec --check-leaks --bail test/"
+},
+"keywords": [
+  "content",
+  "negotiation",
+  "accept",
+  "accepts"
+]
 }
