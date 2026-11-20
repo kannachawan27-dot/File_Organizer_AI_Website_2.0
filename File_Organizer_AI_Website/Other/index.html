@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="File Organizer AI - organize, preview and find files safely in your browser.">
+  <title>File Organizer AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✦</span><span>File<span class="brand-ai">AI</span><small>ORGANIZER STUDIO</small></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav>
+        <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-view="files"><span>▤</span> All files</button>
+        <button class="nav-item" data-view="organize"><span>✣</span> Smart organize</button>
+        <button class="nav-item" data-view="insights"><span>◷</span> Insights</button>
+      </nav>
+      <div class="side-divider"></div>
+      <div class="workspace-label">YOUR SPACE</div>
+      <div class="folder-chip"><span class="folder-dot"></span><span id="folderLabel">No folder selected</span></div>
+      <div class="sidebar-bottom">
+        <div class="privacy-card"><span class="privacy-icon">⌑</span><strong>Your files stay yours</strong><p>Files are processed locally in this browser. Nothing is uploaded.</p></div>
+        <button class="nav-item" id="themeToggle"><span>◐</span> Toggle appearance</button>
+        <div class="profile"><div class="avatar">FA</div><div><strong>File Assistant</strong><small>Local workspace</small></div><span class="online-dot"></span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Overview</strong></div>
+        <div class="top-actions">
+          <span class="local-badge"><i></i> LOCAL MODE</span>
+          <select id="languageSelect" aria-label="Language"><option value="en">EN</option><option value="hi">हिंदी</option><option value="te">తెలుగు</option></select>
+          <button class="icon-button" id="helpBtn" title="Help">?</button>
+          <button class="primary-btn small" id="chooseFolderBtn">＋ Select folder</button>
+        </div>
+      </header>
+
+      <section class="page active-page" id="overviewView">
+        <div class="hero">
+          <div class="hero-copy"><div class="eyebrow"><span class="spark">✦</span> YOUR PERSONAL FILE WORKSPACE</div>
+            <h1>Less clutter.<br><em>More clarity.</em></h1>
+            <p>Bring order to your digital world. Preview changes, organize safely, and find any file in seconds.</p>
+            <div class="hero-buttons"><button class="primary-btn" id="heroChoose">Choose a folder <span>↗</span></button><button class="secondary-btn" id="demoBtn">Explore demo <span>▷</span></button></div>
+            <div class="hero-note"><span class="shield">◇</span> No uploads. No hidden access. You stay in control.</div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="glass-panel panel-back"><span class="mini-file purple">PDF</span><span class="mini-file blue">DOC</span><span class="mini-file green">XLS</span></div>
+            <div class="glass-panel panel-front"><div class="panel-top"><span></span><span></span><span></span></div><div class="folder-visual">▰</div><div class="visual-lines"><i></i><i></i><i></i></div><div class="visual-check">✓</div></div>
+            <div class="floating-tag tag-one">✦ Smart sorting</div><div class="floating-tag tag-two">✓ Preview first</div>
+          </div>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow">AT A GLANCE</div><h2>Your workspace</h2></div><span class="muted" id="scanStatus">Ready when you are</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total files</span><span class="stat-icon purple-bg">▤</span></div><strong id="totalFiles">0</strong><small>In selected folder</small></article>
+          <article class="stat-card"><div class="stat-top"><span>File categories</span><span class="stat-icon blue-bg">▦</span></div><strong id="categoryCount">0</strong><small>By file extension</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Potential duplicates</span><span class="stat-icon orange-bg">⧉</span></div><strong id="duplicateCount">0</strong><small>Same name and size</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Large files</span><span class="stat-icon green-bg">⇧</span></div><strong id="largeCount">0</strong><small>Over 100 MB</small></article>
+        </div>
+
+        <div class="content-grid">
+          <article class="surface category-card"><div class="card-heading"><div><h3>File categories</h3><p>How your files are grouped</p></div><button class="text-button" data-goto="files">View all →</button></div><div id="categoryList" class="category-list empty-state"><div class="empty-graphic">▤</div><strong>Your file overview will appear here</strong><span>Select a folder or explore the demo.</span></div></article>
+          <article class="surface assistant-card"><div class="assistant-heading"><div class="assistant-avatar">✦</div><div><h3>Ask your assistant</h3><p><span class="status-pulse"></span> Ready to help</p></div><span class="beta-tag">BETA</span></div><div class="assistant-message" id="assistantWelcome">Hi! Ask me to find a file, then open it from the All files list. Supported files preview in your browser; other files download. Websites can't launch files directly in Windows apps.</div><div class="suggestions"><button class="suggestion">Find my latest PDF</button><button class="suggestion">Show large files</button></div><form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Ask about your files..." autocomplete="off"><button type="button" class="mic-btn" id="voiceBtn" title="Speak a command">🎙</button><button type="button" class="mic-btn" id="speakToggle" title="Toggle spoken replies">🔊</button><button class="send-btn" aria-label="Send">↑</button></form><div class="assistant-foot"><span id="voiceStatus">Voice: ready · Spoken replies: on</span><br>Searches names and metadata only in the folder you selected.</div></article>
+        </div>
+      </section>
+
+      <section class="page" id="filesView">
+        <div class="page-title-row"><div><div class="eyebrow">YOUR WORKSPACE</div><h1>All files</h1><p>Browse the files in your selected folder.</p></div><button class="primary-btn" id="filesChoose">＋ Select folder</button></div>
+        <div class="toolbar"><div class="search-box"><span>⌕</span><input id="fileSearch" placeholder="Search by file name or extension..."></div><select id="typeFilter"><option value="all">All file types</option><option value="Documents">Documents</option><option value="Images">Images</option><option value="Videos">Videos</option><option value="Audio">Audio</option><option value="Spreadsheets">Spreadsheets</option><option value="Archives">Archives</option><option value="Other">Other</option></select><select id="sortSelect"><option value="name">Name (A–Z)</option><option value="newest">Newest first</option><option value="largest">Largest first</option></select></div>
+        <div class="surface table-surface"><div class="table-caption"><strong id="fileCountLabel">0 files</strong><span>File details are read locally</span></div><div class="table-wrap"><table><thead><tr><th>FILE NAME</th><th>TYPE</th><th>SIZE</th><th>MODIFIED</th><th></th></tr></thead><tbody id="fileTable"><tr><td colspan="5" class="table-empty">No files yet. Select a folder or explore demo data.</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="organizeView">
+        <div class="page-title-row"><div><div class="eyebrow">SAFE BY DESIGN</div><h1>Smart organize</h1><p>See exactly what will happen before moving anything.</p></div><span class="preview-pill">◉ PREVIEW MODE</span></div>
+        <div class="notice"><span>✦</span><div><strong>Preview first, organize second.</strong><p>Files are grouped by extension. Nothing moves until you review the plan and confirm.</p></div></div>
+        <div class="surface organize-surface"><div class="card-heading"><div><h3>Organization plan</h3><p id="planDescription">Choose a folder to create your plan.</p></div><button class="secondary-btn" id="refreshPlan">↻ Refresh</button></div><div id="planList" class="plan-list"><div class="empty-state"><div class="empty-graphic">✣</div><strong>Your plan will show here</strong><span>Choose a folder or load demo data.</span></div></div><div class="plan-footer"><span id="planSummary">No changes planned</span><button class="primary-btn" id="organizeBtn" disabled>Confirm & organize <span>→</span></button></div></div>
+        <p class="small-print">Organizing requires a supported browser and permission to modify the selected folder. You can cancel before confirming.</p>
+      </section>
+
+      <section class="page" id="insightsView">
+        <div class="page-title-row"><div><div class="eyebrow">UNDERSTAND YOUR FILES</div><h1>Insights</h1><p>A quick snapshot of your selected folder.</p></div></div>
+        <div class="insight-grid"><article class="surface insight-wide"><h3>Storage by category</h3><p>File size distribution in your folder</p><div id="storageBars" class="storage-bars"><div class="empty-state"><strong>No insights yet</strong><span>Select a folder or explore demo data.</span></div></div></article><article class="surface insight-small"><h3>Quick checks</h3><div class="check-row"><span>Potential duplicates</span><strong id="insDup">0</strong></div><div class="check-row"><span>Files over 100 MB</span><strong id="insLarge">0</strong></div><div class="check-row"><span>Unknown extensions</span><strong id="insOther">0</strong></div></article></div>
+      </section>
+
+      <footer class="footer"><span>FILE AI <b>·</b> ORGANIZE WITH CONFIDENCE</span><span>Built for local-first productivity</span></footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="confirmDialog" class="modal"><div class="modal-icon">✣</div><h2>Ready to organize?</h2><p id="confirmText">Files will be moved into folders by category.</p><div class="modal-actions"><button class="secondary-btn" id="cancelOrganize">Cancel</button><button class="primary-btn" id="confirmOrganize">Yes, organize files</button></div></dialog>
+  <dialog id="helpDialog" class="modal help-modal"><button class="modal-close" id="closeHelp">×</button><div class="eyebrow">QUICK GUIDE</div><h2>How File Organizer AI works</h2><ol><li><b>Select a folder.</b> Choose a folder using the browser's permission dialog.</li><li><b>Preview your files.</b> The app reads file names, sizes, extensions and modified dates.</li><li><b>Review the plan.</b> Smart organize groups files into category folders.</li><li><b>Confirm changes.</b> Nothing is moved without your confirmation.</li></ol><p class="help-warning">Browser support varies. Use recent Chrome or Edge on localhost or HTTPS. The browser may use an online speech-recognition service; microphone permission is required. Files are searched only in folders you explicitly select. A website cannot reliably launch arbitrary local files in Windows desktop apps: Open previews supported formats in a browser tab or downloads the file. Use a desktop app for guaranteed Windows default-app launching.</p><button class="primary-btn" id="gotIt">Got it</button></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
